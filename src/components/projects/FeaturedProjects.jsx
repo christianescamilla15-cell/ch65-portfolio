@@ -17,7 +17,7 @@ const i18n = {
       es: 'Arquitectura de 4 capas (Agent → Policy → Executor → Wallet) donde la policy NUNCA confía en el agente. WAL + checkpoint que sobreviven SIGKILL. Audit chain HMAC tamper-evident. Hypothesis property-based fuzzing. 77 test suites, 17K LOC.',
       en: '4-layer architecture (Agent → Policy → Executor → Wallet) where the policy NEVER trusts the agent. WAL + checkpoint surviving SIGKILL. HMAC tamper-evident audit chain. Hypothesis property-based fuzzing. 77 test suites, 17K LOC.',
     },
-    demo: { es: 'Ver pitch', en: 'View pitch' },
+    demo: { es: 'Demo en vivo', en: 'Live demo' },
     code: { es: 'Ver código', en: 'View code' },
   },
 }
@@ -64,7 +64,7 @@ export default function FeaturedProjects() {
         eyebrow={tf.eyebrow[lang]}
         title="TreasuryForge"
         subtitle={tf.sub[lang]}
-        demoHref="https://github.com/christianescamilla15-cell/treasuryforge#what-this-proves-for-hiring-managers-reading-the-code"
+        demoHref="https://treasuryforge.vercel.app"
         codeHref="https://github.com/christianescamilla15-cell/treasuryforge"
         demoLabel={tf.demo[lang]}
         codeLabel={tf.code[lang]}
