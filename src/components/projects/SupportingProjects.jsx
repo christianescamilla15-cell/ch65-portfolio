@@ -44,7 +44,7 @@ export default function SupportingProjects() {
       title: 'CallForge',
       eyebrow: i18n.callforge.eyebrow[lang],
       text: i18n.callforge.text[lang],
-      href: 'https://callforge.onrender.com',
+      href: 'https://callforge-h8mi.onrender.com/webchat',
       linkLabel: i18n.callforge.link[lang],
       external: true,
     },
