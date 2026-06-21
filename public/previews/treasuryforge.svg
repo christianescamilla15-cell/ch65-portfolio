@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">TreasuryForge — 4-Layer Agent Safety Architecture</title>
+  <desc id="desc">Safety architecture where Agent proposes Intent, PolicyEngine evaluates against 8 hard rules, Executor fills only approved intents, Wallet manages balances. The policy never trusts the agent.</desc>
+
+  <defs>
+    <linearGradient id="bgL" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7f8fc"/>
+      <stop offset="100%" stop-color="#eef1f9"/>
+    </linearGradient>
+    <linearGradient id="agentG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffeaa7"/>
+      <stop offset="100%" stop-color="#fdcb6e"/>
+    </linearGradient>
+    <linearGradient id="policyG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a29bfe"/>
+      <stop offset="100%" stop-color="#6c5ce7"/>
+    </linearGradient>
+    <linearGradient id="execG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#74b9ff"/>
+      <stop offset="100%" stop-color="#0984e3"/>
+    </linearGradient>
+    <linearGradient id="walletG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#55efc4"/>
+      <stop offset="100%" stop-color="#00b894"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#3b4154"/>
+    </marker>
+    <marker id="arrowdeny" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#d63031"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="720" fill="url(#bgL)"/>
+
+  <!-- Title -->
+  <text x="60" y="60" fill="#0f1828" font-family="-apple-system, system-ui, sans-serif" font-size="30" font-weight="700">TreasuryForge — Agent Safety Architecture</text>
+  <text x="60" y="92" fill="#3b4154" font-family="-apple-system, system-ui, sans-serif" font-size="16">The policy never trusts the agent. 4 layers · 8 hard rules · WAL + HMAC audit · Hypothesis fuzzed</text>
+
+  <!-- Layer 1: AGENT (top) -->
+  <g transform="translate(60, 140)">
+    <rect width="1080" height="90" rx="14" fill="url(#agentG)" opacity="0.95"/>
+    <text x="30" y="36" fill="#0f1828" font-family="-apple-system, system-ui, sans-serif" font-size="20" font-weight="700">① AGENT</text>
+    <text x="30" y="60" fill="#0f1828" font-family="-apple-system, system-ui, sans-serif" font-size="13">LLM / strategy / planner — can hallucinate, can be prompt-injected, can be wrong</text>
+    <text x="30" y="78" fill="#0f1828" font-family="ui-monospace, monospace" font-size="12" opacity="0.75">propose(intent)  →  never executes directly</text>
+  </g>
+  <!-- Arrow down -->
+  <line x1="600" y1="234" x2="600" y2="262" stroke="#3b4154" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="610" y="252" fill="#3b4154" font-family="ui-monospace, monospace" font-size="11">Intent</text>
+
+  <!-- Layer 2: POLICY ENGINE (middle, most important) -->
+  <g transform="translate(60, 270)">
+    <rect width="1080" height="160" rx="14" fill="url(#policyG)"/>
+    <text x="30" y="36" fill="#fff" font-family="-apple-system, system-ui, sans-serif" font-size="20" font-weight="700">② POLICY ENGINE — does NOT trust the agent</text>
+    <text x="30" y="60" fill="#fff" font-family="-apple-system, system-ui, sans-serif" font-size="13" opacity="0.95">8 hard rules in order. Allow only if ALL pass. Latched state survives SIGKILL.</text>
+
+    <!-- 8 rules pills -->
+    <g transform="translate(30, 80)">
+      <rect width="120" height="28" rx="14" fill="#fff" opacity="0.15"/><text x="60" y="19" text-anchor="middle" fill="#fff" font-family="ui-monospace, monospace" font-size="11">1 kill_switch</text>
+      <g transform="translate(128, 0)"><rect width="120" height="28" rx="14" fill="#fff" opacity="0.15"/><text x="60" y="19" text-anchor="middle" fill="#fff" font-family="ui-monospace, monospace" font-size="11">2 breaker</text></g>
+      <g transform="translate(256, 0)"><rect width="120" height="28" rx="14" fill="#fff" opacity="0.15"/><text x="60" y="19" text-anchor="middle" fill="#fff" font-family="ui-monospace, monospace" font-size="11">3 staleness</text></g>
+      <g transform="translate(384, 0)"><rect width="120" height="28" rx="14" fill="#fff" opacity="0.15"/><text x="60" y="19" text-anchor="middle" fill="#fff" font-family="ui-monospace, monospace" font-size="11">4 allowlist</text></g>
+      <g transform="translate(512, 0)"><rect width="120" height="28" rx="14" fill="#fff" opacity="0.15"/><text x="60" y="19" text-anchor="middle" fill="#fff" font-family="ui-monospace, monospace" font-size="11">5 per-tx cap</text></g>
+      <g transform="translate(640, 0)"><rect width="120" height="28" rx="14" fill="#fff" opacity="0.15"/><text x="60" y="19" text-anchor="middle" fill="#fff" font-family="ui-monospace, monospace" font-size="11">6 rate_limit</text></g>
+      <g transform="translate(768, 0)"><rect width="120" height="28" rx="14" fill="#fff" opacity="0.15"/><text x="60" y="19" text-anchor="middle" fill="#fff" font-family="ui-monospace, monospace" font-size="11">7 spend_budget</text></g>
+      <g transform="translate(896, 0)"><rect width="120" height="28" rx="14" fill="#fff" opacity="0.15"/><text x="60" y="19" text-anchor="middle" fill="#fff" font-family="ui-monospace, monospace" font-size="11">8 solvency</text></g>
+    </g>
+    <text x="30" y="140" fill="#fff" font-family="ui-monospace, monospace" font-size="12" opacity="0.75">evaluate(intent) → Verdict { allow | DENY:&lt;rule&gt; }</text>
+  </g>
+
+  <!-- Arrows down from Policy -->
+  <line x1="380" y1="434" x2="380" y2="462" stroke="#3b4154" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="280" y="452" fill="#27ae60" font-family="ui-monospace, monospace" font-size="11" font-weight="700">ALLOW</text>
+  <line x1="820" y1="434" x2="820" y2="462" stroke="#d63031" stroke-width="2" marker-end="url(#arrowdeny)"/>
+  <text x="730" y="452" fill="#d63031" font-family="ui-monospace, monospace" font-size="11" font-weight="700">DENY</text>
+
+  <!-- Layer 3: EXECUTOR (left) + Audit log (right) -->
+  <g transform="translate(60, 470)">
+    <rect width="680" height="100" rx="14" fill="url(#execG)"/>
+    <text x="30" y="36" fill="#fff" font-family="-apple-system, system-ui, sans-serif" font-size="20" font-weight="700">③ EXECUTOR  +  ④ WALLET</text>
+    <text x="30" y="60" fill="#fff" font-family="-apple-system, system-ui, sans-serif" font-size="13" opacity="0.95">Fills only approved intents · Swap point: Sim → Paper → Testnet → Mainnet</text>
+    <text x="30" y="84" fill="#fff" font-family="ui-monospace, monospace" font-size="12" opacity="0.85">balance invariants (never negative, never mints) · t+1 fills</text>
+  </g>
+
+  <!-- Audit log box (right) -->
+  <g transform="translate(760, 470)">
+    <rect width="380" height="100" rx="14" fill="#0f1828"/>
+    <text x="22" y="32" fill="#fff" font-family="-apple-system, system-ui, sans-serif" font-size="15" font-weight="700">Tamper-Evident Audit</text>
+    <text x="22" y="52" fill="#9fb0c7" font-family="ui-monospace, monospace" font-size="11">HMAC-SHA256 hash chain</text>
+    <text x="22" y="70" fill="#9fb0c7" font-family="ui-monospace, monospace" font-size="11">WAL + atomic checkpoint</text>
+    <text x="22" y="88" fill="#9fb0c7" font-family="ui-monospace, monospace" font-size="11">Survives SIGKILL</text>
+  </g>
+
+  <!-- Validation footer -->
+  <g transform="translate(60, 610)">
+    <rect width="1080" height="68" rx="12" fill="#fff" stroke="#d8def0"/>
+    <text x="24" y="28" fill="#0f1828" font-family="-apple-system, system-ui, sans-serif" font-size="14" font-weight="700">Statistical Validation</text>
+    <text x="24" y="52" fill="#3b4154" font-family="ui-monospace, monospace" font-size="12">Deflated Sharpe Ratio (selection-bias corrected) · purged + embargoed K-fold CV · Hypothesis property-based fuzzing · 77 test suites · zero external dependencies</text>
+  </g>
+</svg>

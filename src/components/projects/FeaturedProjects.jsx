@@ -27,6 +27,26 @@ export default function FeaturedProjects() {
   const nf = i18n.nexusforge
   const tf = i18n.treasuryforge
 
+  const nfMedia = (
+    <img
+      src="/previews/nexusforge.svg"
+      alt="NexusForge AI dashboard preview — 24 agents grid with per-agent local model assignments"
+      loading="lazy"
+      decoding="async"
+      style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+    />
+  )
+
+  const tfMedia = (
+    <img
+      src="/previews/treasuryforge.svg"
+      alt="TreasuryForge 4-layer architecture diagram — Agent → Policy Engine (8 rules) → Executor → Wallet, with HMAC audit chain"
+      loading="lazy"
+      decoding="async"
+      style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+    />
+  )
+
   return (
     <div id="featured-projects">
       <FeaturedTile
@@ -38,6 +58,7 @@ export default function FeaturedProjects() {
         codeHref="https://github.com/christianescamilla15-cell/nexusforge-ai"
         demoLabel={nf.demo[lang]}
         codeLabel={nf.code[lang]}
+        media={nfMedia}
       />
       <FeaturedTile
         eyebrow={tf.eyebrow[lang]}
@@ -47,6 +68,7 @@ export default function FeaturedProjects() {
         codeHref="https://github.com/christianescamilla15-cell/treasuryforge"
         demoLabel={tf.demo[lang]}
         codeLabel={tf.code[lang]}
+        media={tfMedia}
       />
     </div>
   )
