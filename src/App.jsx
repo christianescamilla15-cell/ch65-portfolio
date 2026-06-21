@@ -4,35 +4,44 @@ import "./styles.css";
 const DATA = {
   en: {
     nav: { about: "About", skills: "Skills", experience: "Experience", projects: "Projects", contact: "Contact" },
-    heroRole: "Frontend Web Developer | React | JavaScript | UX/UI",
+    heroRole: "AI Engineer · Multi-Agent Orchestration · Agent Safety · Voice + LLM Systems",
     heroTagline:
-      "Frontend-focused developer building responsive interfaces, scalable architecture, and user-centered experiences.",
+      "I build multi-agent platforms, voice + LLM systems, and safety architectures for autonomous agents. Production-grade Python on FastAPI, MCP via Claude Agent SDK, RAG, voice I/O at sub-2s latency.",
     ctaPrimary: "View Projects",
     ctaSecondary: "Download CV (PDF)",
     aboutTitle: "About",
     aboutBody:
-      "I build responsive, accessible interfaces and translate UX/UI concepts into clean, maintainable code. I enjoy component-based architecture, performance optimization, and shipping reliable features in Agile environments.",
+      "3+ years full-time in AI Engineering / 5+ in software total. I ship end-to-end systems: 24-agent orchestration with MCP, voice + LLM customer support, safety guardrails for agentic AI, RAG over pgvector. 8 publicly auditable projects, 3,000+ tests. RLHF training at Scale AI for Claude (Anthropic) and GPT-4o (OpenAI). Open to remote Senior GenAI / AI Engineer roles.",
     skillsTitle: "Technical Skills",
     skills: {
-      frontend: ["HTML5", "CSS3", "JavaScript", "Responsive Web Design", "Cross-Browser Compatibility"],
-      frameworks: ["React (basic/intermediate)", "Flutter UI Development"],
-      architecture: ["Frontend Architecture", "Component-Based Architecture", "Clean Architecture", "MVVM"],
-      web: ["Web Performance Optimization", "SEO Technical Basics", "REST API Integration"],
-      tools: ["Git", "GitHub", "Figma", "Postman", "Jira", "ClickUp"],
-      languages: ["JavaScript", "Dart", "Java", "Python"],
+      ai: ["Claude API (Opus 4.7 / Sonnet 4.6 / Haiku 4.5)", "Claude Agent SDK", "MCP (client + server)", "LangChain", "Groq", "Ollama", "RAG (pgvector + Voyage AI + FAISS)", "Prompt caching", "RLHF", "QLoRA + Unsloth", "Whisper · Kokoro · Chatterbox (voice)"],
+      backend: ["Python 3.12 (async)", "FastAPI", "Pydantic v2", "SQLAlchemy 2 async", "PostgreSQL + pgvector", "Redis", "MongoDB", "Node.js", "Laravel 11"],
+      frontend: ["React 18/19", "Next.js", "TypeScript", "Vue.js 3", "Flutter", "Tailwind CSS", "Vite"],
+      devops: ["Docker · Docker Compose", "GitHub Actions CI/CD", "Vercel · Render", "OpenTelemetry · Sentry", "pytest · Vitest · Playwright", "gitleaks"],
     },
     experienceTitle: "Experience",
     experience: [
       {
-        title: "Frontend / Mobile Developer",
-        company: "Muhami Consulting",
-        location: "Mexico City",
-        dates: "2022 – 2024",
+        title: "Independent AI Engineer",
+        company: "Freelance + Personal R&D",
+        location: "Remote",
+        dates: "2025 – Present",
         bullets: [
-          "Developed responsive user interfaces with modular, reusable components.",
-          "Integrated REST APIs and optimized data flow and UI performance.",
-          "Applied Clean Architecture and MVVM principles to improve maintainability.",
-          "Worked in Agile teams delivering sprint-based releases with clear deliverables.",
+          "Built and deployed an 8-project portfolio: NexusForge AI (24 agents + MCP + RAG + 780+ tests), TreasuryForge (4-layer agent safety + crash-safe state + Hypothesis fuzzing), CallForge (voice-first multi-agent + LLM fallback chain), Verificarro (Claude Vision + Mercado Pago MVP), AIOS Framework (MCP server + 72-detector security scanner).",
+          "Published agentguard — standalone Python library generalizing agent policy enforcement (8 hard rules, crash-safe latched state, zero dependencies, 11 tests).",
+          "Multi-tenant SaaS patterns, prompt caching at 90% savings, per-agent LLM routing (gemma/qwen/claude based on task), self-healing with 5 recovery strategies.",
+          "Stack: Python 3.12 async, FastAPI, Claude Agent SDK, pgvector + Voyage AI, Docker, Vercel + Render.",
+        ],
+      },
+      {
+        title: "AI Data Specialist (RLHF)",
+        company: "Scale AI / Remotasks",
+        location: "Remote",
+        dates: "2023 – Present",
+        bullets: [
+          "RLHF training for Claude (Anthropic) and GPT-4o (OpenAI): evaluation, ranking, code correction.",
+          "Advanced prompt engineering: Chain-of-Thought, few-shot, XML-structured prompts.",
+          "Code evaluation across Python, JavaScript, SQL, Java against quality and security criteria (OWASP, CWE patterns).",
         ],
       },
       {
@@ -46,62 +55,111 @@ const DATA = {
           "Supported feature iteration, debugging, and performance refinement in Agile cycles.",
         ],
       },
+      {
+        title: "Frontend / Mobile Developer",
+        company: "Muhami Consulting",
+        location: "Mexico City",
+        dates: "2022 – 2024",
+        bullets: [
+          "Developed responsive user interfaces with modular, reusable components.",
+          "Integrated REST APIs and optimized data flow and UI performance.",
+          "Applied Clean Architecture and MVVM principles to improve maintainability.",
+          "Worked in Agile teams delivering sprint-based releases with clear deliverables.",
+        ],
+      },
     ],
     projectsTitle: "Projects",
     projectsNote:
-      "These projects are aligned with the role: responsive UI, architecture, performance, and UX/UI sensitivity.",
+      "All projects below are public on GitHub with full source, tests, and (where applicable) live demos. Pick any to audit the code.",
     projects: [
       {
-        name: "Support Chat (Ticket-Based)",
+        name: "NexusForge AI",
         desc:
-          "Real-time support chat with ticket structure. WebSocket messaging + REST API integration. Focused on modular UI and scalability.",
-        tags: ["React UI", "WebSocket", "REST", "Architecture"],
-        links: { live: "#", code: "#" },
+          "24-agent orchestration platform with 6 swarm topologies, DAG engine, 5-tier memory (working/episodic/semantic/regressive/predictive), MCP via Claude Agent SDK, RAG over pgvector + Voyage AI. Self-healing with 5 recovery strategies. 780+ tests. 74,959 LOC Python.",
+        tags: ["Multi-Agent", "MCP", "RAG", "Python", "FastAPI", "pgvector", "Docker"],
+        links: { live: "https://07-nexusforge-ai.vercel.app", code: "https://github.com/christianescamilla15-cell/nexusforge-ai" },
       },
       {
-        name: "E-commerce / Inventory Dashboard",
+        name: "TreasuryForge — Agent Safety Architecture",
         desc:
-          "Responsive dashboard for inventory and product tracking. Component-based UI and optimized data rendering for fast interactions.",
-        tags: ["Responsive", "Component UI", "Performance", "REST"],
-        links: { live: "#", code: "#" },
+          "4-layer pattern (Agent → Policy → Executor → Wallet) where the policy NEVER trusts the agent. WAL + atomic checkpoint survives SIGKILL. HMAC-SHA256 tamper-evident audit chain. Deflated Sharpe Ratio + purged K-fold CV for honest validation. Hypothesis property-based fuzzing. 77 test suites, 17,700 LOC.",
+        tags: ["Agent Safety", "Crash-Safe State", "HMAC Audit", "Hypothesis", "Python"],
+        links: { live: "https://github.com/christianescamilla15-cell/treasuryforge#what-this-proves-for-hiring-managers-reading-the-code", code: "https://github.com/christianescamilla15-cell/treasuryforge" },
+      },
+      {
+        name: "agentguard",
+        desc:
+          "Standalone Python library: safety guardrails for autonomous agents. 8 hard rules (kill_switch, circuit_breaker, staleness, allowlist, per_call_cap, rate_limit, spend_budget, solvency) + crash-safe latched state via snapshot/restore. Zero dependencies. 11 tests passing.",
+        tags: ["Library", "Agent Safety", "Zero Deps", "Python", "MIT"],
+        links: { live: "https://github.com/christianescamilla15-cell/agentguard#30-second-example", code: "https://github.com/christianescamilla15-cell/agentguard" },
+      },
+      {
+        name: "CallForge — Voice + LLM Customer Support",
+        desc:
+          "Multi-agent voice platform: Whisper STT (0.9s) + Kokoro ONNX TTS (CPU RTF 0.34) + Chatterbox voice cloning. 6 specialized agents. LLM provider fallback (Groq → Ollama → Mock) for zero-cost offline operation. Hybrid RAG. Multi-tenant. Clean Architecture. 15 test suites (100% offline).",
+        tags: ["Voice I/O", "Multi-Agent", "LLM Fallback", "Clean Architecture", "Python"],
+        links: { live: "https://github.com/christianescamilla15-cell/callforge#what-this-proves", code: "https://github.com/christianescamilla15-cell/callforge" },
+      },
+      {
+        name: "Verificarro — Auto Verification MX (MVP)",
+        desc:
+          "Production MVP for used-car verification in Mexico. Claude Sonnet 4.6 Vision for photo anomaly detection. REPUVE scraper with reCaptcha v2 bypass (2Captcha + local Whisper audio solver). VIN decoder (ISO 3779 + NHTSA vPIC). Mercado Pago integration. Encrypted PII (Fernet). Chrome MV3 extension. 491 tests.",
+        tags: ["Claude Vision", "Production MVP", "Mercado Pago", "Playwright", "React"],
+        links: { live: "https://github.com/christianescamilla15-cell/verificarro", code: "https://github.com/christianescamilla15-cell/verificarro" },
+      },
+      {
+        name: "AIOS Framework — Spec-Driven Engineering OS",
+        desc:
+          "Multi-strategy security scanner (72 detectors) with convergence loop: regex + ensemble OSS (semgrep / bandit / trivy / checkov / gitleaks) + LLM deep-review + cross-file taint flow. MCP server exposing aios init/task/analyze/release. CWE → compliance mapping (LFPDPPP / PCI-DSS / SOX / OWASP). 132 Python modules, 428 tests.",
+        tags: ["MCP Server", "Security Scanner", "Compliance Mapping", "Python"],
+        links: { live: "https://github.com/christianescamilla15-cell/aios-framework", code: "https://github.com/christianescamilla15-cell/aios-framework" },
       },
     ],
     contactTitle: "Contact",
-    contactBody: "Open to freelance projects. Available for coordination between 9:00 am and 5:00 pm (CDMX).",
+    contactBody: "Open to remote Senior GenAI / AI Engineer roles. Based in CDMX, available immediately.",
     contactCta: "Email me",
-    footer: "Built with React • Optimized for ATS-aligned portfolio keywords",
+    footer: "Built with React + Vite • Updated 2026-06 — AI Engineer portfolio",
   },
   es: {
     nav: { about: "Perfil", skills: "Habilidades", experience: "Experiencia", projects: "Proyectos", contact: "Contacto" },
-    heroRole: "Frontend Web Developer | React | JavaScript | UX/UI",
+    heroRole: "AI Engineer · Orquestación Multi-Agente · Agent Safety · Sistemas Voz + LLM",
     heroTagline:
-      "Desarrollador enfocado en frontend: interfaces responsivas, arquitectura escalable y experiencias centradas en el usuario.",
+      "Construyo plataformas multi-agente, sistemas de voz + LLM, y arquitecturas de seguridad para agentes autónomos. Python production-grade en FastAPI, MCP vía Claude Agent SDK, RAG, I/O de voz con latencia <2s.",
     ctaPrimary: "Ver Proyectos",
     ctaSecondary: "Descargar CV (PDF)",
     aboutTitle: "Perfil",
     aboutBody:
-      "Construyo interfaces responsivas y accesibles, y convierto conceptos UX/UI en código limpio y mantenible. Me gusta la arquitectura por componentes, optimización de performance y entregar features confiables en entornos ágiles.",
+      "3+ años full-time en AI Engineering / 5+ totales en software. Entrego sistemas end-to-end: orquestación con 24 agentes y MCP, soporte al cliente con voz + LLM, guardrails de seguridad para AI agentic, RAG sobre pgvector. 8 proyectos públicos auditables, 3,000+ tests. Entrenamiento RLHF en Scale AI evaluando Claude (Anthropic) y GPT-4o (OpenAI). Abierto a posiciones remote de Senior GenAI / AI Engineer.",
     skillsTitle: "Habilidades Técnicas",
     skills: {
-      frontend: ["HTML5", "CSS3", "JavaScript", "Diseño Web Responsivo", "Compatibilidad Cross-Browser"],
-      frameworks: ["React (básico/intermedio)", "Flutter UI Development"],
-      architecture: ["Arquitectura Frontend", "Arquitectura por Componentes", "Clean Architecture", "MVVM"],
-      web: ["Optimización de Performance", "SEO Técnico Básico", "Integración de APIs REST"],
-      tools: ["Git", "GitHub", "Figma", "Postman", "Jira", "ClickUp"],
-      languages: ["JavaScript", "Dart", "Java", "Python"],
+      ai: ["Claude API (Opus 4.7 / Sonnet 4.6 / Haiku 4.5)", "Claude Agent SDK", "MCP (cliente + servidor)", "LangChain", "Groq", "Ollama", "RAG (pgvector + Voyage AI + FAISS)", "Prompt caching", "RLHF", "QLoRA + Unsloth", "Whisper · Kokoro · Chatterbox (voz)"],
+      backend: ["Python 3.12 (async)", "FastAPI", "Pydantic v2", "SQLAlchemy 2 async", "PostgreSQL + pgvector", "Redis", "MongoDB", "Node.js", "Laravel 11"],
+      frontend: ["React 18/19", "Next.js", "TypeScript", "Vue.js 3", "Flutter", "Tailwind CSS", "Vite"],
+      devops: ["Docker · Docker Compose", "GitHub Actions CI/CD", "Vercel · Render", "OpenTelemetry · Sentry", "pytest · Vitest · Playwright", "gitleaks"],
     },
     experienceTitle: "Experiencia",
     experience: [
       {
-        title: "Frontend / Mobile Developer",
-        company: "Muhami Consulting",
-        location: "CDMX",
-        dates: "2022 – 2024",
+        title: "AI Engineer Independiente",
+        company: "Freelance + R&D Personal",
+        location: "Remoto",
+        dates: "2025 – Presente",
         bullets: [
-          "Desarrollé interfaces responsivas con componentes modulares y reutilizables.",
-          "Integré APIs REST y optimicé flujo de datos y performance de UI.",
-          "Apliqué Clean Architecture y MVVM para mejorar mantenibilidad.",
-          "Trabajo en equipos ágiles con entregas por sprint y entregables claros.",
+          "Construí y desplegué un portafolio de 8 proyectos: NexusForge AI (24 agentes + MCP + RAG + 780+ tests), TreasuryForge (4 capas de seguridad para agentes + estado crash-safe + Hypothesis fuzzing), CallForge (multi-agente voz-first + cadena de fallback LLM), Verificarro (Claude Vision + Mercado Pago MVP), AIOS Framework (MCP server + scanner de seguridad con 72 detectores).",
+          "Publiqué agentguard — librería Python standalone que generaliza la enforcement de policy en agentes (8 reglas hard, estado crash-safe, cero dependencias, 11 tests).",
+          "Patrones multi-tenant SaaS, prompt caching al 90% de ahorro, ruteo de LLM por agente (gemma/qwen/claude según tarea), self-healing con 5 estrategias de recuperación.",
+          "Stack: Python 3.12 async, FastAPI, Claude Agent SDK, pgvector + Voyage AI, Docker, Vercel + Render.",
+        ],
+      },
+      {
+        title: "AI Data Specialist (RLHF)",
+        company: "Scale AI / Remotasks",
+        location: "Remoto",
+        dates: "2023 – Presente",
+        bullets: [
+          "Entrenamiento RLHF para Claude (Anthropic) y GPT-4o (OpenAI): evaluación, ranking, corrección de código.",
+          "Prompt engineering avanzado: Chain-of-Thought, few-shot, prompts estructurados en XML.",
+          "Evaluación de código en Python, JavaScript, SQL y Java contra criterios de calidad y seguridad (OWASP, patrones CWE).",
         ],
       },
       {
@@ -115,30 +173,70 @@ const DATA = {
           "Soporte en iteración de features, debugging y performance en ciclos ágiles.",
         ],
       },
+      {
+        title: "Frontend / Mobile Developer",
+        company: "Muhami Consulting",
+        location: "CDMX",
+        dates: "2022 – 2024",
+        bullets: [
+          "Desarrollé interfaces responsivas con componentes modulares y reutilizables.",
+          "Integré APIs REST y optimicé flujo de datos y performance de UI.",
+          "Apliqué Clean Architecture y MVVM para mejorar mantenibilidad.",
+          "Trabajo en equipos ágiles con entregas por sprint y entregables claros.",
+        ],
+      },
     ],
     projectsTitle: "Proyectos",
     projectsNote:
-      "Proyectos alineados a la vacante: UI responsiva, arquitectura, performance y sensibilidad UX/UI.",
+      "Todos los proyectos abajo son públicos en GitHub con código fuente, tests, y (cuando aplica) demos en vivo. Audita el que quieras.",
     projects: [
       {
-        name: "Support Chat (Ticket-Based)",
+        name: "NexusForge AI",
         desc:
-          "Chat en tiempo real con estructura por tickets. Mensajería WebSocket + integración REST. UI modular y escalable.",
-        tags: ["React UI", "WebSocket", "REST", "Arquitectura"],
-        links: { live: "#", code: "#" },
+          "Plataforma de orquestación con 24 agentes, 6 topologías de swarm, DAG engine, memoria de 5 capas (working/episodic/semantic/regressive/predictive), MCP vía Claude Agent SDK, RAG sobre pgvector + Voyage AI. Self-healing con 5 estrategias de recuperación. 780+ tests. 74,959 LOC Python.",
+        tags: ["Multi-Agente", "MCP", "RAG", "Python", "FastAPI", "pgvector", "Docker"],
+        links: { live: "https://07-nexusforge-ai.vercel.app", code: "https://github.com/christianescamilla15-cell/nexusforge-ai" },
       },
       {
-        name: "Dashboard E-commerce / Inventarios",
+        name: "TreasuryForge — Safety Architecture",
         desc:
-          "Dashboard responsivo para inventarios y productos. UI por componentes y render eficiente para interacción rápida.",
-        tags: ["Responsive", "Componentes", "Performance", "REST"],
-        links: { live: "#", code: "#" },
+          "Patrón de 4 capas (Agent → Policy → Executor → Wallet) donde la policy NUNCA confía en el agente. WAL + checkpoint atómico sobreviven SIGKILL. Cadena HMAC-SHA256 tamper-evident. Deflated Sharpe Ratio + purged K-fold CV para validación honesta. Property-based fuzzing con Hypothesis. 77 test suites, 17,700 LOC.",
+        tags: ["Agent Safety", "Crash-Safe", "HMAC Audit", "Hypothesis", "Python"],
+        links: { live: "https://github.com/christianescamilla15-cell/treasuryforge#what-this-proves-for-hiring-managers-reading-the-code", code: "https://github.com/christianescamilla15-cell/treasuryforge" },
+      },
+      {
+        name: "agentguard",
+        desc:
+          "Librería Python standalone: guardrails de seguridad para agentes autónomos. 8 reglas hard (kill_switch, circuit_breaker, staleness, allowlist, per_call_cap, rate_limit, spend_budget, solvency) + estado crash-safe vía snapshot/restore. Cero dependencias. 11 tests pasando.",
+        tags: ["Librería", "Agent Safety", "Zero Deps", "Python", "MIT"],
+        links: { live: "https://github.com/christianescamilla15-cell/agentguard#30-second-example", code: "https://github.com/christianescamilla15-cell/agentguard" },
+      },
+      {
+        name: "CallForge — Voz + LLM",
+        desc:
+          "Plataforma multi-agente con voz: Whisper STT (0.9s) + Kokoro ONNX TTS (CPU RTF 0.34) + Chatterbox voice cloning. 6 agentes especializados. Cadena de fallback LLM (Groq → Ollama → Mock) para operación offline a costo cero. Hybrid RAG. Multi-tenant. Clean Architecture. 15 test suites (100% offline).",
+        tags: ["Voz", "Multi-Agente", "LLM Fallback", "Clean Architecture", "Python"],
+        links: { live: "https://github.com/christianescamilla15-cell/callforge#what-this-proves", code: "https://github.com/christianescamilla15-cell/callforge" },
+      },
+      {
+        name: "Verificarro — Verificación de Autos MX (MVP)",
+        desc:
+          "MVP en producción para verificación de autos usados en México. Claude Sonnet 4.6 Vision para detección de anomalías en fotos. Scraper REPUVE con bypass de reCaptcha v2 (2Captcha + Whisper local). Decodificador VIN (ISO 3779 + NHTSA vPIC). Mercado Pago. PII encriptada (Fernet). Extensión Chrome MV3. 491 tests.",
+        tags: ["Claude Vision", "MVP Producción", "Mercado Pago", "Playwright", "React"],
+        links: { live: "https://github.com/christianescamilla15-cell/verificarro", code: "https://github.com/christianescamilla15-cell/verificarro" },
+      },
+      {
+        name: "AIOS Framework — Spec-Driven OS",
+        desc:
+          "Scanner de seguridad multi-estrategia (72 detectores) con loop de convergencia: regex + ensemble OSS (semgrep / bandit / trivy / checkov / gitleaks) + LLM deep-review + taint flow cross-file. MCP server exponiendo aios init/task/analyze/release. Mapping CWE → compliance (LFPDPPP / PCI-DSS / SOX / OWASP). 132 módulos Python, 428 tests.",
+        tags: ["MCP Server", "Security Scanner", "Compliance", "Python"],
+        links: { live: "https://github.com/christianescamilla15-cell/aios-framework", code: "https://github.com/christianescamilla15-cell/aios-framework" },
       },
     ],
     contactTitle: "Contacto",
-    contactBody: "Disponible para proyectos freelance. Coordinación de 9:00 am a 5:00 pm (hora CDMX).",
+    contactBody: "Abierto a posiciones remote de Senior GenAI / AI Engineer. Basado en CDMX, disponible inmediato.",
     contactCta: "Envíame un correo",
-    footer: "Hecho con React • Optimizado para keywords ATS",
+    footer: "Hecho con React + Vite • Actualizado 2026-06 — Portafolio AI Engineer",
   },
 };
 
@@ -159,9 +257,8 @@ export default function App() {
   const [lang, setLang] = useState("en");
   const t = useMemo(() => DATA[lang], [lang]);
 
-  // TODO: put your real CV link here when you host it (e.g., Google Drive / personal domain)
-  const CV_PDF_URL = "#";
-  const EMAIL = "chris_231011@hotmail.com";
+  const CV_PDF_URL = "/cv.pdf";
+  const EMAIL = "christianescamilla15@gmail.com";
 
   return (
     <div className="page">
@@ -216,7 +313,7 @@ export default function App() {
             </div>
 
             <div className="meta">
-              <span>Mexico City, MX</span>
+              <span>Mexico City, MX · Remote OK</span>
               <span className="sep">•</span>
               <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
             </div>
@@ -227,16 +324,18 @@ export default function App() {
               <p className="cardTitle">ATS Match Keywords</p>
               <div className="badgeGrid">
                 {[
-                  "HTML5",
-                  "CSS3",
-                  "JavaScript",
-                  "React",
-                  "UX/UI",
-                  "Responsive Design",
-                  "Frontend Architecture",
-                  "SEO",
-                  "Git",
-                  "REST APIs",
+                  "AI Engineer",
+                  "LLM",
+                  "Multi-Agent",
+                  "MCP",
+                  "RAG",
+                  "Claude",
+                  "Python",
+                  "FastAPI",
+                  "Agent Safety",
+                  "Voice + LLM",
+                  "pgvector",
+                  "Docker",
                 ].map((k) => (
                   <Badge key={k}>{k}</Badge>
                 ))}
@@ -257,6 +356,24 @@ export default function App() {
         <Section id="skills" title={t.skillsTitle}>
           <div className="grid2">
             <div className="panel">
+              <h3 className="h3">AI &amp; LLMs</h3>
+              <ul className="list">
+                {t.skills.ai.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="panel">
+              <h3 className="h3">Backend</h3>
+              <ul className="list">
+                {t.skills.backend.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="panel">
               <h3 className="h3">Frontend</h3>
               <ul className="list">
                 {t.skills.frontend.map((x) => (
@@ -266,27 +383,9 @@ export default function App() {
             </div>
 
             <div className="panel">
-              <h3 className="h3">Frameworks</h3>
+              <h3 className="h3">DevOps &amp; Testing</h3>
               <ul className="list">
-                {t.skills.frameworks.map((x) => (
-                  <li key={x}>{x}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="panel">
-              <h3 className="h3">Architecture</h3>
-              <ul className="list">
-                {t.skills.architecture.map((x) => (
-                  <li key={x}>{x}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="panel">
-              <h3 className="h3">Web + Tools</h3>
-              <ul className="list">
-                {[...t.skills.web, ...t.skills.tools].map((x) => (
+                {t.skills.devops.map((x) => (
                   <li key={x}>{x}</li>
                 ))}
               </ul>
@@ -349,7 +448,7 @@ export default function App() {
         {/* CONTACT */}
         <Section id="contact" title={t.contactTitle}>
           <p className="p">{t.contactBody}</p>
-          <a className="btnPrimary" href={`mailto:${EMAIL}?subject=Wexpand%20Freelance%20Web%20Project`}>
+          <a className="btnPrimary" href={`mailto:${EMAIL}?subject=AI%20Engineer%20Opportunity`}>
             {t.contactCta}
           </a>
         </Section>
