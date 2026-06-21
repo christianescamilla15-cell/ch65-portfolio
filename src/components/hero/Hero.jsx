@@ -31,18 +31,6 @@ export default function Hero() {
   return (
     <section id="hero" className="hero snap section--hero-adjacent" aria-label="Hero">
       <div className="hero__inner reveal">
-        <img
-          src="/perfil.jpg"
-          alt="Christian Hernandez"
-          width={88}
-          height={88}
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-          onError={(e) => { e.currentTarget.src = '/headshot.webp' }}
-          className="hero__photo"
-        />
-
         <div className="eyebrow">{i18n.eyebrow[lang]}</div>
 
         <h1 className="hero__headline">{i18n.headline[lang]}</h1>

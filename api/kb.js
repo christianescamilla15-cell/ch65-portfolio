@@ -16,11 +16,59 @@ export async function getKB() {
 // Hardcoded fallback — used when Supabase is unavailable
 export const PORTFOLIO_KB = {
   about: {
-    en: `Christian Hernandez Escamilla is a Software Engineer from Mexico City (CDMX), Mexico. He specializes in AI systems, multi-agent orchestration, automation, and full-stack development. He has 3+ years of experience with LLMs — 2.5+ years at Scale AI training Claude and GPT-4o through RLHF, and has independently built 20+ production AI systems with 1,500+ tests across 22+ GitHub repos. He also ships AIOS (published on PyPI), runs a self-hosted MCP bridge at mcp.chernandez.dev, and built a zero-cloud phone-to-PC dispatch system with GitHub Actions self-hosted runners. Holds a Software Engineering degree from UVEG (2018-2022) and completed a Full Stack Java Developer Bootcamp at Generation Mexico (2026). Available immediately. Languages: Spanish (native), English (B1-B2 professional).`,
-    es: `Christian Hernandez Escamilla es Ingeniero en Software de la Ciudad de México (CDMX). Se especializa en sistemas de IA, orquestación multi-agente, automatización, y desarrollo full-stack. Tiene 3+ años de experiencia con LLMs — 2.5+ años en Scale AI entrenando Claude y GPT-4o mediante RLHF, y ha construido independientemente 20+ sistemas de IA en producción con 1,500+ tests en 22+ repos GitHub. Además publica AIOS en PyPI, opera un bridge MCP auto-hospedado en mcp.chernandez.dev, y construyó un sistema de dispatch zero-cloud teléfono→PC con GitHub Actions self-hosted runners. Ingeniería en Software de UVEG (2018-2022) y Bootcamp Full Stack Java Developer de Generation México (2026). Disponible de manera inmediata.`
+    en: `Christian Hernandez Escamilla is a Software Engineer from Mexico City (CDMX), Mexico. He specializes in AI systems, multi-agent orchestration, automation, and full-stack development. He has 3+ years of experience with LLMs — 2.5+ years at Scale AI training Claude and GPT-4o through RLHF, and has independently built 24+ production AI systems with 3,000+ tests across 24+ public GitHub repos (incl. TreasuryForge, CallForge, agentguard, Verificarro, AIOS Framework). He also ships AIOS (published on PyPI), runs a self-hosted MCP bridge at mcp.chernandez.dev, and built a zero-cloud phone-to-PC dispatch system with GitHub Actions self-hosted runners. Holds a Software Engineering degree from UVEG (2018-2022) and completed a Full Stack Java Developer Bootcamp at Generation Mexico (2026). Available immediately. Languages: Spanish (native), English (B1-B2 professional).`,
+    es: `Christian Hernandez Escamilla es Ingeniero en Software de la Ciudad de México (CDMX). Se especializa en sistemas de IA, orquestación multi-agente, automatización, y desarrollo full-stack. Tiene 3+ años de experiencia con LLMs — 2.5+ años en Scale AI entrenando Claude y GPT-4o mediante RLHF, y ha construido independientemente 24+ sistemas de IA en producción con 3,000+ tests en 24+ repos públicos de GitHub (incl. TreasuryForge, CallForge, agentguard, Verificarro, AIOS Framework). Además publica AIOS en PyPI, opera un bridge MCP auto-hospedado en mcp.chernandez.dev, y construyó un sistema de dispatch zero-cloud teléfono→PC con GitHub Actions self-hosted runners. Ingeniería en Software de UVEG (2018-2022) y Bootcamp Full Stack Java Developer de Generation México (2026). Disponible de manera inmediata.`
   },
 
   projects: [
+    {
+      name: "TreasuryForge",
+      description: {
+        en: "Safety architecture for autonomous agents — 4-layer Agent → Policy → Executor → Wallet pattern where the policy NEVER trusts the agent. WAL + atomic checkpoint surviving SIGKILL. HMAC-SHA256 tamper-evident audit chain. Deflated Sharpe Ratio + purged K-fold CV. Hypothesis property-based fuzzing. 77 test suites, 17K LOC.",
+        es: "Arquitectura de seguridad para agentes autónomos — patrón de 4 capas Agent → Policy → Executor → Wallet donde la policy NUNCA confía en el agente. WAL + checkpoint atómico sobreviven SIGKILL. Cadena de auditoría HMAC-SHA256 tamper-evident. Deflated Sharpe Ratio + purged K-fold CV. Property-based fuzzing con Hypothesis. 77 test suites, 17K LOC."
+      },
+      stack: "Python, Hypothesis, asyncio, stdlib-only crypto",
+      tests: 77,
+      demo: "https://github.com/christianescamilla15-cell/treasuryforge#what-this-proves-for-hiring-managers-reading-the-code",
+      github: "https://github.com/christianescamilla15-cell/treasuryforge",
+      keyMetric: "4-layer safety, 8 policy rules, 77 test suites"
+    },
+    {
+      name: "CallForge",
+      description: {
+        en: "Multi-agent voice + LLM customer support platform. Whisper STT (0.9s) + Kokoro ONNX TTS (CPU RTF 0.34) + Chatterbox voice cloning. 6 specialized agents. LLM provider fallback chain (Groq → Ollama → Mock) for zero-cost offline operation. Hybrid RAG with keyword fallback. Multi-tenant. Clean Architecture. 15 test suites (100% offline).",
+        es: "Plataforma multi-agente de soporte con voz + LLM. Whisper STT (0.9s) + Kokoro ONNX TTS (CPU RTF 0.34) + Chatterbox voice cloning. 6 agentes especializados. Cadena de fallback LLM (Groq → Ollama → Mock) para operación offline a costo cero. Hybrid RAG con keyword fallback. Multi-tenant. Clean Architecture. 15 test suites (100% offline)."
+      },
+      stack: "Python, FastAPI, Whisper, Kokoro ONNX, Chatterbox, Groq, Ollama",
+      tests: 15,
+      demo: "https://github.com/christianescamilla15-cell/callforge#what-this-proves",
+      github: "https://github.com/christianescamilla15-cell/callforge",
+      keyMetric: "6 agents, Whisper 0.9s STT, Kokoro RTF 0.34 CPU"
+    },
+    {
+      name: "agentguard",
+      description: {
+        en: "Standalone Python library: safety guardrails for autonomous agents. 8 hard rules (kill_switch, circuit_breaker, staleness, allowlist, per_call_cap, rate_limit, spend_budget, solvency) + crash-safe latched state via snapshot/restore. Generalized from TreasuryForge. Zero dependencies. PyPI-ready. 11 tests passing.",
+        es: "Librería Python standalone: guardrails de seguridad para agentes autónomos. 8 reglas hard (kill_switch, circuit_breaker, staleness, allowlist, per_call_cap, rate_limit, spend_budget, solvency) + estado crash-safe vía snapshot/restore. Generalizado desde TreasuryForge. Cero dependencias. PyPI-ready. 11 tests pasando."
+      },
+      stack: "Python 3.10+, pytest, stdlib only",
+      tests: 11,
+      demo: "https://github.com/christianescamilla15-cell/agentguard#30-second-example",
+      github: "https://github.com/christianescamilla15-cell/agentguard",
+      keyMetric: "8 hard rules, zero dependencies, 11 tests"
+    },
+    {
+      name: "Verificarro",
+      description: {
+        en: "Production MVP: used-car verification marketplace for Mexico. Claude Sonnet 4.6 Vision for photo anomaly detection. REPUVE scraper with reCaptcha v2 bypass (2Captcha + local Whisper). VIN decoder (ISO 3779 + NHTSA vPIC). Mercado Pago integration. Encrypted PII (Fernet). Chrome MV3 extension. 491 tests.",
+        es: "MVP en producción: marketplace de verificación de autos usados en México. Claude Sonnet 4.6 Vision para detección de anomalías en fotos. Scraper REPUVE con bypass de reCaptcha v2 (2Captcha + Whisper local). Decodificador VIN (ISO 3779 + NHTSA vPIC). Integración Mercado Pago. PII encriptada (Fernet). Extensión Chrome MV3. 491 tests."
+      },
+      stack: "Python, FastAPI, SQLAlchemy 2 async, Claude Vision, Playwright, React 18, Mercado Pago",
+      tests: 491,
+      demo: "https://verificarro.vercel.app",
+      github: "https://github.com/christianescamilla15-cell/verificarro",
+      keyMetric: "491 tests, $0.05 per report, 60s pipeline"
+    },
     {
       name: "LangChain Pipeline",
       description: {
