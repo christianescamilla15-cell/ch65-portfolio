@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CH — AI Engineer</title>
+<meta name="description" content="Construyo sistemas multi-agente de IA, pipelines LLM, y productos inteligentes." />
+
+<style>
+/* ============================================================
+   TOKENS — Apple-inspired system (light + dark)
+   ============================================================ */
+:root {
+  /* Tipografía */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  --tracking-tight: -0.02em;
+  --tracking-hero: -0.015em;
+  --leading-hero: 1.05;
+  --leading-body: 1.47;
+
+  /* Paleta clara */
+  --bg:            #FFFFFF;
+  --bg-alt:        #F5F5F7;
+  --bg-inverse:    #000000;
+  --text:          #1D1D1F;
+  --text-secondary:#6E6E73;
+  --text-muted:    #86868B;
+  --text-inverse:  #F5F5F7;
+  --accent:        #0071E3;
+  --accent-hover:  #0077ED;
+  --border:        #E5E7EB;
+  --chip-bg:       #F3F4F6;
+
+  /* Radios */
+  --r-pill:   980px;
+  --r-tile:   22px;
+  --r-card:   18px;
+  --r-chip:   100px;
+  --r-input:  12px;
+
+  /* Espaciado (múltiplos de 8) */
+  --s-1: 8px;  --s-2: 16px; --s-3: 24px; --s-4: 32px;
+  --s-5: 48px; --s-6: 64px; --s-7: 80px; --s-8: 120px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast: 200ms var(--ease);
+  --t-base: 300ms var(--ease);
+  --t-slow: 500ms var(--ease);
+
+  /* Navbar */
+  --nav-h: 48px;
+  --nav-bg: rgba(255, 255, 255, 0.72);
+  --nav-border: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg:            #000000;
+  --bg-alt:        #0A0A0B;
+  --bg-inverse:    #FFFFFF;
+  --text:          #F5F5F7;
+  --text-secondary:#A1A1A6;
+  --text-muted:    #6E6E73;
+  --text-inverse:  #1D1D1F;
+  --border:        rgba(255, 255, 255, 0.1);
+  --chip-bg:       rgba(255, 255, 255, 0.06);
+  --nav-bg:        rgba(0, 0, 0, 0.72);
+  --nav-border:    rgba(255, 255, 255, 0.08);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--t-base), color var(--t-base);
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+::selection { background: var(--accent); color: #fff; }
+
+/* Skip link accesible */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+.sr-only:focus {
+  position: fixed; top: 8px; left: 8px; width: auto; height: auto;
+  padding: 8px 16px; background: var(--accent); color: #fff;
+  border-radius: var(--r-input); z-index: 1000; clip: auto;
+}
+
+/* ============================================================
+   NAVBAR — glass pill sticky (Apple keynote)
+   ============================================================ */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--nav-bg);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--nav-border);
+  transition: background var(--t-base);
+}
+.nav__inner {
+  max-width: 1200px; margin: 0 auto;
+  height: var(--nav-h);
+  padding: 0 var(--s-3);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--s-3);
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand__mark {
+  width: 28px; height: 28px; border-radius: 8px;
+  border: 1px solid var(--border);
+  display: grid; place-items: center;
+  font-weight: 600; font-size: 12px; letter-spacing: -0.02em;
+}
+.brand__name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+.brand__role { font-size: 12px; color: var(--text-secondary); }
+
+.nav__links { display: flex; gap: var(--s-3); }
+.nav__links a {
+  font-size: 13px; color: var(--text-secondary);
+  padding: 6px 10px; border-radius: 8px;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+.nav__links a:hover { color: var(--text); background: var(--chip-bg); }
+
+.nav__tools { display: flex; align-items: center; gap: var(--s-1); }
+.icon-btn {
+  width: 32px; height: 32px; display: grid; place-items: center;
+  border-radius: 10px; border: 0; background: transparent; cursor: pointer;
+  color: var(--text-secondary); transition: color var(--t-fast), background var(--t-fast);
+}
+.icon-btn:hover { color: var(--text); background: var(--chip-bg); }
+
+.lang {
+  display: inline-flex; background: var(--chip-bg);
+  border-radius: var(--r-pill); padding: 2px;
+}
+.lang button {
+  border: 0; background: transparent; cursor: pointer;
+  padding: 4px 10px; font-size: 12px; font-weight: 500;
+  color: var(--text-secondary); border-radius: var(--r-pill);
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.lang button.is-active { background: var(--text); color: var(--bg); }
+
+.cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: var(--r-pill);
+  background: var(--accent); color: #fff !important;
+  font-size: 13px; font-weight: 500; border: 0; cursor: pointer;
+  transition: background var(--t-fast), transform var(--t-fast);
+}
+.cta:hover { background: var(--accent-hover); }
+.cta--ghost {
+  background: transparent; color: var(--text) !important;
+  border: 1px solid var(--border);
+}
+.cta--ghost:hover { background: var(--chip-bg); }
+
+.hamburger { display: none; }
+
+@media (max-width: 860px) {
+  .nav__links, .lang, .cta.nav__cta { display: none; }
+  .hamburger { display: grid; }
+}
+
+/* ============================================================
+   UTIL — full-bleed section, container, reveal
+   ============================================================ */
+.section { width: 100%; padding: var(--s-8) var(--s-3); }
+.section--tight { padding: var(--s-7) var(--s-3); }
+.section--dark { background: var(--bg-inverse); color: var(--text-inverse); }
+.section--alt  { background: var(--bg-alt); }
+.container { max-width: 1040px; margin: 0 auto; }
+.container--wide { max-width: 1200px; }
+
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 600ms var(--ease), transform 600ms var(--ease); }
+.reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ============================================================
+   HERO — 80px headline, dual chevron-link CTA
+   ============================================================ */
+.hero {
+  text-align: center;
+  padding: var(--s-8) var(--s-3) var(--s-7);
+}
+.hero__photo {
+  width: 88px; height: 88px; border-radius: 50%;
+  margin: 0 auto var(--s-3);
+  border: 2px solid var(--border);
+  background: linear-gradient(135deg, var(--chip-bg), var(--bg-alt));
+  display: grid; place-items: center;
+  font-size: 28px; font-weight: 600; color: var(--text-secondary);
+  letter-spacing: -0.02em;
+}
+.eyebrow {
+  font-size: 13px; font-weight: 600;
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.08em; margin-bottom: var(--s-2);
+}
+.hero__headline {
+  font-size: clamp(44px, 6vw, 80px);
+  font-weight: 600;
+  letter-spacing: var(--tracking-hero);
+  line-height: var(--leading-hero);
+  margin: 0 auto var(--s-3);
+  max-width: 900px;
+}
+.hero__sub {
+  font-size: clamp(18px, 1.6vw, 21px);
+  color: var(--text-secondary);
+  max-width: 640px; margin: 0 auto var(--s-4);
+}
+
+.hero__ctas {
+  display: inline-flex; gap: var(--s-4); flex-wrap: wrap;
+  justify-content: center; margin-bottom: var(--s-5);
+}
+.link-chevron {
+  color: var(--accent); font-size: 17px; font-weight: 400;
+  display: inline-flex; align-items: center; gap: 4px;
+  transition: color var(--t-fast);
+}
+.link-chevron:hover { color: var(--accent-hover); }
+.link-chevron::after {
+  content: '›'; font-size: 20px; line-height: 1;
+  transition: transform var(--t-fast);
+}
+.link-chevron:hover::after { transform: translateX(3px); }
+
+.hero__stack {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  justify-content: center; max-width: 620px; margin: 0 auto;
+}
+.chip {
+  font-size: 12px; padding: 6px 12px;
+  background: var(--chip-bg); color: var(--text-secondary);
+  border-radius: var(--r-chip);
+}
+
+/* ============================================================
+   PROOF — métricas grandes
+   ============================================================ */
+.proof {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-4);
+  text-align: center;
+}
+.proof__num {
+  font-size: clamp(40px, 4.5vw, 64px);
+  font-weight: 600; letter-spacing: var(--tracking-tight);
+  line-height: 1; margin-bottom: 8px;
+}
+.proof__label {
+  font-size: 13px; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+@media (max-width: 720px) {
+  .proof { grid-template-columns: repeat(2, 1fr); gap: var(--s-5) var(--s-3); }
+}
+
+/* ============================================================
+   FEATURED TILE — full-bleed alternating
+   ============================================================ */
+.tile {
+  text-align: center;
+  max-width: 980px; margin: 0 auto;
+}
+.tile__eyebrow {
+  font-size: 14px; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: var(--s-2);
+}
+.section--dark .tile__eyebrow { color: var(--text-muted); }
+.tile__headline {
+  font-size: clamp(36px, 4.5vw, 56px);
+  font-weight: 600; letter-spacing: var(--tracking-tight);
+  line-height: 1.08; margin: 0 0 var(--s-2);
+}
+.tile__sub {
+  font-size: clamp(18px, 1.5vw, 21px);
+  color: var(--text-secondary); max-width: 680px;
+  margin: 0 auto var(--s-4);
+}
+.section--dark .tile__sub { color: #A1A1A6; }
+.tile__links { display: inline-flex; gap: var(--s-4); flex-wrap: wrap; justify-content: center; margin-bottom: var(--s-5); }
+
+.tile__visual {
+  margin-top: var(--s-4);
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-tile);
+  background: linear-gradient(135deg, #1D1D1F, #0071E3);
+  display: grid; place-items: center;
+  color: #fff; font-size: 14px; letter-spacing: 0.06em;
+  text-transform: uppercase; opacity: 0.9;
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.35);
+}
+.section--dark .tile__visual {
+  background: linear-gradient(135deg, #F5F5F7, #0071E3);
+  color: #1D1D1F;
+}
+
+/* ============================================================
+   GRID 2-UP — supporting projects
+   ============================================================ */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-2);
+}
+.card {
+  background: var(--bg-alt);
+  border-radius: var(--r-tile);
+  padding: var(--s-6) var(--s-5);
+  transition: transform var(--t-base);
+}
+.card:hover { transform: translateY(-2px); }
+.card__eyebrow {
+  font-size: 13px; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: var(--s-1);
+}
+.card__title {
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 600; letter-spacing: var(--tracking-tight);
+  line-height: 1.1; margin: 0 0 var(--s-2);
+}
+.card__text {
+  font-size: 17px; color: var(--text-secondary);
+  margin: 0 0 var(--s-3);
+}
+@media (max-width: 860px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .card { padding: var(--s-5) var(--s-4); }
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact { text-align: center; }
+.contact__headline {
+  font-size: clamp(36px, 4.5vw, 56px);
+  font-weight: 600; letter-spacing: var(--tracking-tight);
+  line-height: 1.08; margin: 0 0 var(--s-2);
+}
+.contact__sub {
+  font-size: 21px; color: var(--text-secondary);
+  max-width: 560px; margin: 0 auto var(--s-5);
+}
+.contact__actions {
+  display: inline-flex; gap: var(--s-2); flex-wrap: wrap; justify-content: center;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: var(--s-6) var(--s-3);
+  font-size: 12px; color: var(--text-secondary);
+}
+.footer__grid {
+  max-width: 1040px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-5);
+  margin-bottom: var(--s-5);
+}
+.footer__col h4 {
+  font-size: 12px; font-weight: 600; color: var(--text);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin: 0 0 var(--s-2);
+}
+.footer__col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.footer__col a:hover { color: var(--text); }
+.footer__stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--s-2); }
+.footer__bottom {
+  max-width: 1040px; margin: 0 auto;
+  padding-top: var(--s-3); border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--s-2);
+}
+@media (max-width: 720px) {
+  .footer__grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="sr-only">Saltar al contenido</a>
+
+<!-- ========== NAVBAR ========== -->
+<header class="nav" role="banner">
+  <div class="nav__inner">
+    <a href="#" class="brand" aria-label="Inicio">
+      <span class="brand__mark">CH</span>
+      <span>
+        <span class="brand__name">Christian H.</span>
+        <span class="brand__role" data-i18n="role"> · AI Engineer</span>
+      </span>
+    </a>
+
+    <nav class="nav__links" aria-label="Principal">
+      <a href="#proyectos" data-i18n="nav.work">Proyectos</a>
+      <a href="#sobre" data-i18n="nav.about">Sobre mí</a>
+      <a href="#stack" data-i18n="nav.stack">Stack</a>
+      <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+    </nav>
+
+    <div class="nav__tools">
+      <button class="icon-btn" id="themeToggle" aria-label="Cambiar tema" title="Tema">
+        <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <div class="lang" role="group" aria-label="Idioma">
+        <button data-lang="es" class="is-active">ES</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <a href="#proyectos" class="cta nav__cta" data-i18n="nav.cta">Ver Proyectos</a>
+      <button class="icon-btn hamburger" aria-label="Menú" id="hamburger">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ========== HERO ========== -->
+  <section class="hero container">
+    <div class="reveal">
+      <div class="hero__photo" aria-hidden="true">CH</div>
+      <div class="eyebrow" data-i18n="hero.eyebrow">Portafolio · AI Engineer</div>
+      <h1 class="hero__headline" data-i18n="hero.headline">
+        IA que corre en producción.
+      </h1>
+      <p class="hero__sub" data-i18n="hero.sub">
+        Sistemas multi-agente, pipelines LLM y productos inteligentes. Del prototipo al deploy.
+      </p>
+      <div class="hero__ctas">
+        <a href="#proyectos" class="link-chevron" data-i18n="hero.cta1">Ver proyectos</a>
+        <a href="https://github.com" target="_blank" rel="noopener" class="link-chevron" data-i18n="hero.cta2">GitHub</a>
+      </div>
+      <div class="hero__stack" aria-label="Stack principal">
+        <span class="chip">Python</span>
+        <span class="chip">FastAPI</span>
+        <span class="chip">React</span>
+        <span class="chip">PostgreSQL</span>
+        <span class="chip">pgvector</span>
+        <span class="chip">Flutter</span>
+        <span class="chip">Docker</span>
+        <span class="chip">Claude API</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROOF ========== -->
+  <section class="section section--alt section--tight" aria-label="Métricas">
+    <div class="container reveal">
+      <div class="proof">
+        <div>
+          <div class="proof__num">20+</div>
+          <div class="proof__label" data-i18n="proof.systems">Sistemas en producción</div>
+        </div>
+        <div>
+          <div class="proof__num">1,500+</div>
+          <div class="proof__label" data-i18n="proof.tests">Tests automatizados</div>
+        </div>
+        <div>
+          <div class="proof__num">24</div>
+          <div class="proof__label" data-i18n="proof.agents">Agentes orquestados</div>
+        </div>
+        <div>
+          <div class="proof__num">3+</div>
+          <div class="proof__label" data-i18n="proof.years">Años con LLMs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURED TILE 1 — dark ========== -->
+  <section id="proyectos" class="section section--dark" aria-label="NexusForge">
+    <div class="container reveal">
+      <div class="tile">
+        <div class="tile__eyebrow">Flagship · Multi-agent</div>
+        <h2 class="tile__headline">NexusForge</h2>
+        <p class="tile__sub" data-i18n="nf.sub">
+          Orquestación de 24 agentes autónomos con memoria compartida y routing inteligente.
+        </p>
+        <div class="tile__links">
+          <a href="#" class="link-chevron" data-i18n="nf.demo">Demo en vivo</a>
+          <a href="#" class="link-chevron" data-i18n="nf.code">Ver código</a>
+        </div>
+        <div class="tile__visual" role="img" aria-label="NexusForge screenshot">
+          [ screenshot · video loop · diagrama full-bleed ]
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURED TILE 2 — light ========== -->
+  <section class="section" aria-label="Spacetime Lab">
+    <div class="container reveal">
+      <div class="tile">
+        <div class="tile__eyebrow">Flagship · Research platform</div>
+        <h2 class="tile__headline">Spacetime Lab</h2>
+        <p class="tile__sub" data-i18n="sl.sub">
+          Plataforma de experimentación para LLMs con versionado, evals y trazabilidad de prompts.
+        </p>
+        <div class="tile__links">
+          <a href="#" class="link-chevron" data-i18n="sl.demo">Demo en vivo</a>
+          <a href="#" class="link-chevron" data-i18n="sl.code">Ver código</a>
+        </div>
+        <div class="tile__visual" role="img" aria-label="Spacetime Lab screenshot">
+          [ screenshot · video loop · diagrama full-bleed ]
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GRID 2-UP — supporting ========== -->
+  <section class="section section--alt" aria-label="Proyectos adicionales">
+    <div class="container">
+      <div class="grid-2">
+        <article class="card reveal">
+          <div class="card__eyebrow">Open source · PyPI</div>
+          <h3 class="card__title">AIOS</h3>
+          <p class="card__text" data-i18n="aios.text">
+            Runtime ligero para agentes con tool-use y memoria persistente.
+          </p>
+          <a href="#" class="link-chevron" data-i18n="aios.link">pip install aios</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__eyebrow">RAG · pgvector</div>
+          <h3 class="card__title">Context Engine</h3>
+          <p class="card__text" data-i18n="ctx.text">
+            Búsqueda semántica híbrida con re-ranking y citations automáticas.
+          </p>
+          <a href="#" class="link-chevron" data-i18n="ctx.link">Ver proyecto</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__eyebrow">Mobile · Flutter</div>
+          <h3 class="card__title">Pocket Agent</h3>
+          <p class="card__text" data-i18n="pa.text">
+            Cliente móvil para conversar con agentes privados desde el teléfono.
+          </p>
+          <a href="#" class="link-chevron" data-i18n="pa.link">Ver proyecto</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__eyebrow">DevEx · CLI</div>
+          <h3 class="card__title">Prompt Studio</h3>
+          <p class="card__text" data-i18n="ps.text">
+            CLI para iterar prompts con diffs, evals y replay de conversaciones.
+          </p>
+          <a href="#" class="link-chevron" data-i18n="ps.link">Ver proyecto</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section id="sobre" class="section" aria-label="Sobre mí">
+    <div class="container reveal" style="max-width: 760px;">
+      <div class="tile" style="text-align: left;">
+        <div class="tile__eyebrow" data-i18n="about.eyebrow">Sobre mí</div>
+        <h2 class="tile__headline">Del prototipo al deploy.</h2>
+        <p class="tile__sub" style="margin-left: 0; text-align: left;" data-i18n="about.body">
+          Ingeniero enfocado en construir sistemas de IA que resuelven problemas reales.
+          Diseño pipelines LLM, orquesto agentes, y cuido cada detalle del flujo hasta producción.
+        </p>
+        <div class="tile__links" style="justify-content: flex-start;">
+          <a href="#" class="link-chevron" data-i18n="about.cv">Descargar CV</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener" class="link-chevron">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="contacto" class="section section--dark" aria-label="Contacto">
+    <div class="container reveal">
+      <div class="contact">
+        <div class="tile__eyebrow" data-i18n="contact.eyebrow">Trabajemos juntos</div>
+        <h2 class="contact__headline" data-i18n="contact.headline">¿Construyamos algo?</h2>
+        <p class="contact__sub" data-i18n="contact.sub">
+          Disponible para roles de AI Engineer, freelance y proyectos de alto impacto.
+        </p>
+        <div class="contact__actions">
+          <a href="mailto:hola@ejemplo.com" class="cta" data-i18n="contact.email">Escribir correo</a>
+          <a href="https://github.com" target="_blank" rel="noopener" class="cta cta--ghost" style="color:#F5F5F7 !important; border-color: rgba(255,255,255,0.2);">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer" role="contentinfo">
+  <div class="footer__grid">
+    <div class="footer__col">
+      <h4>Christian H.</h4>
+      <p style="margin: 0; color: var(--text-secondary);" data-i18n="footer.tagline">
+        AI Engineer · Sistemas multi-agente y pipelines LLM.
+      </p>
+      <div class="footer__stack">
+        <span class="chip">Python</span>
+        <span class="chip">FastAPI</span>
+        <span class="chip">React</span>
+        <span class="chip">Claude API</span>
+        <span class="chip">pgvector</span>
+      </div>
+    </div>
+    <div class="footer__col">
+      <h4 data-i18n="footer.nav">Navegación</h4>
+      <ul>
+        <li><a href="#proyectos" data-i18n="nav.work">Proyectos</a></li>
+        <li><a href="#sobre" data-i18n="nav.about">Sobre mí</a></li>
+        <li><a href="#stack" data-i18n="nav.stack">Stack</a></li>
+        <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4 data-i18n="footer.links">Enlaces</h4>
+      <ul>
+        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:hola@ejemplo.com">Correo</a></li>
+        <li><a href="#" data-i18n="footer.cv">Descargar CV</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© 2026 Christian H. <span data-i18n="footer.rights">Todos los derechos reservados.</span></span>
+    <a href="https://github.com" target="_blank" rel="noopener" class="link-chevron" data-i18n="footer.ghcta">Ver en GitHub</a>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   SCROLL REVEAL — IntersectionObserver (respeta reduced-motion)
+   ========================================================= */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reveals = document.querySelectorAll('.reveal');
+if (!reduceMotion && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach((el) => io.observe(el));
+} else {
+  reveals.forEach((el) => el.classList.add('is-in'));
+}
+
+/* =========================================================
+   THEME TOGGLE
+   ========================================================= */
+const root = document.documentElement;
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+});
+
+/* =========================================================
+   LANG TOGGLE — ES / EN
+   ========================================================= */
+const i18n = {
+  es: {
+    'role': ' · AI Engineer',
+    'nav.work': 'Proyectos', 'nav.about': 'Sobre mí', 'nav.stack': 'Stack', 'nav.contact': 'Contacto', 'nav.cta': 'Ver Proyectos',
+    'hero.eyebrow': 'Portafolio · AI Engineer',
+    'hero.headline': 'IA que corre en producción.',
+    'hero.sub': 'Sistemas multi-agente, pipelines LLM y productos inteligentes. Del prototipo al deploy.',
+    'hero.cta1': 'Ver proyectos', 'hero.cta2': 'GitHub',
+    'proof.systems': 'Sistemas en producción', 'proof.tests': 'Tests automatizados',
+    'proof.agents': 'Agentes orquestados', 'proof.years': 'Años con LLMs',
+    'nf.sub': 'Orquestación de 24 agentes autónomos con memoria compartida y routing inteligente.',
+    'nf.demo': 'Demo en vivo', 'nf.code': 'Ver código',
+    'sl.sub': 'Plataforma de experimentación para LLMs con versionado, evals y trazabilidad de prompts.',
+    'sl.demo': 'Demo en vivo', 'sl.code': 'Ver código',
+    'aios.text': 'Runtime ligero para agentes con tool-use y memoria persistente.',
+    'aios.link': 'pip install aios',
+    'ctx.text': 'Búsqueda semántica híbrida con re-ranking y citations automáticas.',
+    'ctx.link': 'Ver proyecto',
+    'pa.text': 'Cliente móvil para conversar con agentes privados desde el teléfono.',
+    'pa.link': 'Ver proyecto',
+    'ps.text': 'CLI para iterar prompts con diffs, evals y replay de conversaciones.',
+    'ps.link': 'Ver proyecto',
+    'about.eyebrow': 'Sobre mí',
+    'about.body': 'Ingeniero enfocado en construir sistemas de IA que resuelven problemas reales. Diseño pipelines LLM, orquesto agentes, y cuido cada detalle del flujo hasta producción.',
+    'about.cv': 'Descargar CV',
+    'contact.eyebrow': 'Trabajemos juntos',
+    'contact.headline': '¿Construyamos algo?',
+    'contact.sub': 'Disponible para roles de AI Engineer, freelance y proyectos de alto impacto.',
+    'contact.email': 'Escribir correo',
+    'footer.tagline': 'AI Engineer · Sistemas multi-agente y pipelines LLM.',
+    'footer.nav': 'Navegación', 'footer.links': 'Enlaces',
+    'footer.cv': 'Descargar CV', 'footer.rights': 'Todos los derechos reservados.',
+    'footer.ghcta': 'Ver en GitHub'
+  },
+  en: {
+    'role': ' · AI Engineer',
+    'nav.work': 'Work', 'nav.about': 'About', 'nav.stack': 'Stack', 'nav.contact': 'Contact', 'nav.cta': 'See Work',
+    'hero.eyebrow': 'Portfolio · AI Engineer',
+    'hero.headline': 'AI that ships to production.',
+    'hero.sub': 'Multi-agent systems, LLM pipelines, and intelligent products. From prototype to deploy.',
+    'hero.cta1': 'See work', 'hero.cta2': 'GitHub',
+    'proof.systems': 'Systems in production', 'proof.tests': 'Automated tests',
+    'proof.agents': 'Orchestrated agents', 'proof.years': 'Years with LLMs',
+    'nf.sub': '24 autonomous agents orchestrated with shared memory and smart routing.',
+    'nf.demo': 'Live demo', 'nf.code': 'View code',
+    'sl.sub': 'LLM experimentation platform with versioning, evals, and prompt traceability.',
+    'sl.demo': 'Live demo', 'sl.code': 'View code',
+    'aios.text': 'Lightweight runtime for agents with tool-use and persistent memory.',
+    'aios.link': 'pip install aios',
+    'ctx.text': 'Hybrid semantic search with re-ranking and automatic citations.',
+    'ctx.link': 'View project',
+    'pa.text': 'Mobile client to chat with private agents from your phone.',
+    'pa.link': 'View project',
+    'ps.text': 'CLI to iterate on prompts with diffs, evals, and conversation replay.',
+    'ps.link': 'View project',
+    'about.eyebrow': 'About',
+    'about.body': 'Engineer focused on building AI systems that solve real problems. I design LLM pipelines, orchestrate agents, and care about every detail all the way to production.',
+    'about.cv': 'Download CV',
+    'contact.eyebrow': 'Let\'s work together',
+    'contact.headline': 'Build something?',
+    'contact.sub': 'Open to AI Engineer roles, freelance, and high-impact projects.',
+    'contact.email': 'Send email',
+    'footer.tagline': 'AI Engineer · Multi-agent systems and LLM pipelines.',
+    'footer.nav': 'Navigation', 'footer.links': 'Links',
+    'footer.cv': 'Download CV', 'footer.rights': 'All rights reserved.',
+    'footer.ghcta': 'View on GitHub'
+  }
+};
+function setLang(l) {
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const k = el.getAttribute('data-i18n');
+    if (i18n[l] && i18n[l][k] !== undefined) el.textContent = i18n[l][k];
+  });
+  document.querySelectorAll('.lang button').forEach((b) => {
+    b.classList.toggle('is-active', b.dataset.lang === l);
+  });
+}
+document.querySelectorAll('.lang button').forEach((b) => {
+  b.addEventListener('click', () => setLang(b.dataset.lang));
+});
+</script>
+
+</body>
+</html>
