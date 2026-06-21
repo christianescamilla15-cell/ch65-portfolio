@@ -52,7 +52,7 @@ export default function SupportingProjects() {
       title: 'agentguard',
       eyebrow: i18n.agentguard.eyebrow[lang],
       text: i18n.agentguard.text[lang],
-      href: 'https://agentguard.vercel.app',
+      href: 'https://agentguard-demo.vercel.app',
       linkLabel: i18n.agentguard.link[lang],
       external: true,
     },
